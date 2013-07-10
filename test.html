@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<title>trie.js</title>
+		<script type="text/javascript" src="words.js"></script>
+		<script type="text/javascript" src="trie.js"></script>
+		<script type="text/javascript">
+			var trie = new Trie(), selection = [], i, start_trie, end_trie, start_regex, end_regex;
+
+			for(w in words) {
+				trie.put(words[w], words[w]);
+			}
+
+			for(i = 0; i < 100; i++) {
+				selection.push(words[Math.ceil(Math.random()*words.length)]);
+			}
+
+			start_trie = new Date().getTime();
+			for(s in selection) {
+				trie.get(s);
+			}
+			end_trie = new Date().getTime();
+
+			start_regex = new Date().getTime();
+			for(s in selection) {
+				for(w in words) {
+					if(new RegExp(s).test(words[w].toLowerCase())) break;
+				}
+			}
+			end_regex = new Date().getTime();
+
+			console.log("trie = ", end_trie - start_trie);
+			console.log("regex = ", end_regex - start_regex);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
